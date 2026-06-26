@@ -1,0 +1,88 @@
+NMAP SCAN COMMANDS - TASK 01
+═══════════════════════════════════════════════════════════════════
+
+1. INSTALLATION (Kali Linux)
+   sudo apt update && sudo apt install nmap -y
+
+2. VERIFY INSTALLATION
+   nmap --version
+
+3. IDENTIFY TARGET IP
+   ip a (on target machine)
+   or
+   ifconfig (on target machine)
+
+4. BASIC PORT SCAN (Top 1000 ports)
+   nmap [target_ip]
+
+5. FULL PORT SCAN (All 65535 ports)
+   nmap -p- [target_ip]
+
+6. SERVICE VERSION DETECTION
+   nmap -sV [target_ip]
+
+7. SERVICE VERSION WITH HIGH INTENSITY
+   nmap -sV --version-intensity 9 [target_ip]
+
+8. OS DETECTION
+   sudo nmap -O [target_ip]
+
+9. COMPREHENSIVE AGGRESSIVE SCAN
+   sudo nmap -sV -O -A [target_ip] -oN full_scan.txt
+
+10. SAVE OUTPUT TO FILE
+    nmap [target_ip] -oN basic_scan.txt
+
+11. SCAN WITH SPECIFIC PORT
+    nmap -p 80,443 [target_ip]
+
+12. SCAN WITH TIMING TEMPLATE
+    nmap -T4 [target_ip] (Faster scan)
+
+═══════════════════════════════════════════════════════════════════
+EXPLANATION OF FLAGS
+═══════════════════════════════════════════════════════════════════
+
+-sV    : Service/Version detection
+-O     : OS detection
+-A     : Aggressive scan (includes -sV, -O, traceroute, scripts)
+-p-    : Scan all ports (1-65535)
+-oN    : Normal output to file
+-T0-5  : Timing template (0=paranoid, 5=insane)
+-v     : Verbose output
+
+═══════════════════════════════════════════════════════════════════
+NOTES
+═══════════════════════════════════════════════════════════════════
+
+- Replace [target_ip] with actual target IP address
+- Use sudo for OS detection (-O) and aggressive scans
+- Results saved with -oN for normal output format
+- Always get permission before scanning
+- Use -T4 for normal scanning speed
+- Use -T0 or -T1 for stealth scanning
+
+═══════════════════════════════════════════════════════════════════
+EXAMPLE OUTPUTS FROM REPORT
+═══════════════════════════════════════════════════════════════════
+
+Basic Scan Output:
+PORT     STATE    SERVICE
+21/tcp   open     ftp
+22/tcp   open     ssh
+80/tcp   open     http
+3306/tcp open     mysql
+
+Service Version Scan:
+PORT     SERVICE    VERSION
+21/tcp   ftp        vsftpd 3.0.5
+22/tcp   ssh        OpenSSH 10.2p1 Debian 5
+80/tcp   http       Apache httpd 2.4.66 ((Debian))
+3306/tcp mysql      MariaDB 11.8.6-6 from Debian
+
+OS Detection:
+OS: Linux (Kernel 5.0 - 6.2)
+
+═══════════════════════════════════════════════════════════════════
+END OF COMMANDS
+═══════════════════════════════════════════════════════════════════

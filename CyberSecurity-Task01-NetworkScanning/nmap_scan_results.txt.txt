@@ -1,0 +1,96 @@
+═══════════════════════════════════════════════════════════════════
+              NMAP SCAN RESULTS - TASK 01
+                 OASIS Infobyte Internship
+═══════════════════════════════════════════════════════════════════
+
+Scan Date: 26 June, 2026
+Target IP: 192.168.x.x (Local VM)
+Scan Type: Basic, Service Version, OS Detection
+
+═══════════════════════════════════════════════════════════════════
+OPEN PORTS FOUND
+═══════════════════════════════════════════════════════════════════
+
+PORT     STATE    SERVICE        VERSION
+21/tcp   open     ftp            vsftpd 3.0.5
+22/tcp   open     ssh            OpenSSH 10.2p1 Debian 5
+80/tcp   open     http           Apache httpd 2.4.66 ((Debian))
+3306/tcp open     mysql          MariaDB 11.8.6-6 from Debian
+
+═══════════════════════════════════════════════════════════════════
+SERVICE DETAILS
+═══════════════════════════════════════════════════════════════════
+
+PORT 21 - FTP (vsftpd 3.0.5)
+- File Transfer Protocol
+- Transmits data in plain text
+- No encryption
+- Vulnerable to sniffing and MITM attacks
+
+PORT 22 - SSH (OpenSSH 10.2p1 Debian 5)
+- Secure Shell for remote access
+- Encrypted communication
+- Default configuration may be vulnerable
+- Brute-force attack risk
+
+PORT 80 - HTTP (Apache httpd 2.4.66)
+- Web server
+- Unencrypted HTTP traffic
+- Vulnerable to MITM attacks
+- Web application vulnerabilities possible
+
+PORT 3306 - MySQL (MariaDB 11.8.6-6)
+- Database server
+- Default port exposed
+- Risk of brute-force attacks
+- Potential default credentials
+
+═══════════════════════════════════════════════════════════════════
+OS DETECTION
+═══════════════════════════════════════════════════════════════════
+
+Operating System: Linux (Kernel 5.0 - 6.2)
+Device Type: General Purpose
+OS CPE: cpe:/o:linux:linux_kernel
+
+═══════════════════════════════════════════════════════════════════
+SECURITY ASSESSMENT SUMMARY
+═══════════════════════════════════════════════════════════════════
+
+CRITICAL RISKS:
+- Port 21 (FTP): Plain text authentication - Credentials exposed
+- Port 3306 (MySQL): Database exposed - Potential data breach
+
+HIGH RISKS:
+- Port 80 (HTTP): Unencrypted web traffic - MITM attacks possible
+
+MEDIUM RISKS:
+- Port 22 (SSH): Brute-force attack vector if password auth enabled
+
+═══════════════════════════════════════════════════════════════════
+RECOMMENDATIONS
+═══════════════════════════════════════════════════════════════════
+
+1. Disable FTP and use SFTP/FTPS instead
+2. Implement HTTPS on web server (port 443)
+3. Bind MySQL to localhost only
+4. Enforce SSH key-based authentication
+5. Apply firewall rules to restrict access
+6. Regular vulnerability scanning and patching
+7. Implement fail2ban for SSH protection
+8. Use strong passwords and disable default credentials
+
+═══════════════════════════════════════════════════════════════════
+SCAN COMMANDS USED
+═══════════════════════════════════════════════════════════════════
+
+1. Basic Scan:     nmap [target_ip]
+2. Full Port Scan: nmap -p- [target_ip]
+3. Service Scan:   nmap -sV [target_ip]
+4. OS Detection:   sudo nmap -O [target_ip]
+5. Aggressive:     sudo nmap -sV -O -A [target_ip] -oN full_scan.txt
+6. Save Output:    nmap [target_ip] -oN basic_scan.txt
+
+═══════════════════════════════════════════════════════════════════
+END OF REPORT
+═══════════════════════════════════════════════════════════════════
